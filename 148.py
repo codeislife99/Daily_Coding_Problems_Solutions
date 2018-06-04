@@ -7,9 +7,6 @@
 
 	For example, for n = 2, one gray code would be [00, 01, 11, 10].
 '''
-import copy
-
-
 def solve_2(k,s,results):
 	if len(s)==k:
 		results.append(s)
