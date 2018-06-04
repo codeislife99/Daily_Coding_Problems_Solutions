@@ -17,7 +17,7 @@ def preprocess(L):
 def solve(L,start,end):
 	arr = preprocess(L)
 	print(arr)
-	return (arr[end-1]-arr[max(start-1,0)])
+	return arr[end-1]-arr[max(start-1,0)]
 
 if __name__=='__main__':
 	L = [1,2,3,4,5]
