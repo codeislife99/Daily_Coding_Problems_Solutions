@@ -36,7 +36,7 @@ class Stack:
 if __name__=='__main__':
 
 	S = Stack()
-
+	print(S.isEmpty())
 	S.push(23)
 	S.push(65)
 	print(S.peek())
