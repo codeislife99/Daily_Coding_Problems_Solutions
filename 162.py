@@ -31,6 +31,7 @@ def insert(word,T):
 			T = Trie_Node()
 			prev.map[char] = T
 			prev = T 
+
 def print_trie(T):
 	if len(T.map)>0:
 		print(T.isunique, T.map.keys())
@@ -51,6 +52,7 @@ def helper(word,T):
 			prev = prev.map[char]
 		
 	return unique_prefix
+	
 def solve(arr):
 	T = Trie_Node()
 	for string in arr:
