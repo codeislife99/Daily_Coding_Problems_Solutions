@@ -14,13 +14,10 @@ def solve(arr):
 		if votes == 0:
 			number = ele
 			votes+=1
-
 		elif ele!=number:
 			votes-=1
-		elif ele==number:
+		else ele==number:
 			votes+=1
-		print(number, votes)
-
 	return number
 
 if __name__=='__main__':
