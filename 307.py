@@ -4,33 +4,20 @@ class Node():
 		self.left  = None
 		self.right = None 
 
-class Solution():
+def solve(node,value,floor = None,ceiling = None):
+	if node is None:
+		return floor,ceiling
 
-	def solve(self,root, value):
-		self.value = value
-		self.floor = -float('inf')
-		self.ceiling = float('inf')
-		self.recur(root)
+	if node.val == value:
+		floor,ceiling = value,value
 
-		return self.floor, self.ceiling
+	elif node.val < value:
+		floor,ceiling = solve(node.right, value, node.val, ceiling)
 
-	def recur(self,node):
+	else:
+		floor,ceiling = solve(node.left, value, floor, node.val)
 
-		if node is None:
-			return
-
-		print(node.val)
-
-		if node.val <= self.value and node.val >= self.floor:
-			self.floor = node.val
-			self.recur(node.right)
-
-		if node.val >= self.value and node.val <= self.ceiling:
-			self.ceiling = node.val
-			self.recur(node.left)
-
-
-
+	return floor,ceiling
 
 if __name__ == '__main__':
 	# Level 1
@@ -58,6 +45,8 @@ if __name__ == '__main__':
 	root.left.right.left.right = Node(7)
 
 	value = 6.1
-	s = Solution()
-	floor,ceiling = s.solve(root,value)
+
+	# s = Solution()
+	# floor,ceiling = s.solve(root,value)
+	floor,ceiling = solve(root,value)
 	print("Floor = ", floor, "Ceiling = ",ceiling)
