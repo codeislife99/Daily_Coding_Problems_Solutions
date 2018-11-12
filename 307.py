@@ -6,6 +6,7 @@ Given a binary search tree, find the floor and ceiling of a given integer. The f
 If either value does not exist, return None
 
 '''
+
 class Node():
 	def __init__(self,val):
 		self.val   = val
