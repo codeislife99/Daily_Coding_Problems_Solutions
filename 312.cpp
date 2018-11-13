@@ -12,6 +12,7 @@ A B C C
 Given an integer N, determine in how many ways this task is possible.
 
 */
+
 #include <climits>
 #include <iostream>
 #include <string>
@@ -41,24 +42,19 @@ Given an integer N, determine in how many ways this task is possible.
 
 using namespace std;
 
+int solve(int n){
+	vector<int> f(n+1,0);
+	vector<int> g(n+1,0);
 
-int solve(int n,unordered_map<int,int>memo = {}){
-	if(memo.count(n)){
-		return memo[n];
+	f[1] = 1;f[2] = 2;
+	g[1] = 1;g[2] = 2;
+
+	for(int i=3;i<n+1;i++){
+		f[i] = f[i-1] + f[i-2] + 2*g[i-2];
+		g[i] = g[i-1] + f[i-1];
 	}
-	if(n<0){
-		memo[n] = 0;
-	}
-	else if(n==0){
-		memo[n] = 1;
-	}
-	else{
-		memo[n] = solve(n-1,memo) + solve(n-3,memo);
-	}
-	return memo[n];
+	return f[n];
 }
-
-
 int main(){
 	cout << solve(10) << "\n";
 }

@@ -13,22 +13,39 @@ Given an integer N, determine in how many ways this task is possible.
 
 '''
 
-def solve(n,memo = {}):
-	if n in memo:
-		return memo[n]
+def solve(n,f = {},g = {}):
+	if n in f and n in g:
+		return f[n],g[n]
 
-	if n < 0:
-		memo[n] = 0
-
-	elif n == 0:
-		memo[n] = 1
+	if n == 1 or n==2:
+		f[n] = n
+		g[n] = n
 
 	else:
-		memo[n] = solve(n-1,memo) + solve(n-3,memo)
+		f[n] = solve(n-1,f,g)[0] + solve(n-2,f,g)[0] + 2*solve(n-2,f,g)[1]
+		g[n] = solve(n-1,f,g)[1] + solve(n-1,f,g)[0]
 
-	return memo[n]
+	return f[n],g[n]
+
+def solve_iter(n):
+	f = [0 for _ in range(n+1)]
+	g = [0 for _ in range(n+1)]
+
+	f[1] = 1;f[2] = 2;
+	g[1] = 1;g[2] = 2;
+
+	for i in range(3,n+1):
+		f[i] = f[i-1] + f[i-2] + 2*g[i-2]
+		g[i] = g[i-1] + f[i-1]
 
 
+	return f[n]
 
 if __name__ == '__main__':
-	print(solve(10))
+	N = 10
+	print(solve(N))
+	print(solve_iter(N))
+	assert(solve(N)[0] == solve_iter(N))
+	print(solve_iter(N))
+
+
